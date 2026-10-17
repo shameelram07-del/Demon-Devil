@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demon, coffee?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF4E6; --bg2:#FFE3C2; --ink:#2A0F3A; --soft:#7A5A8C; --flame:#FF5A1F; --ember:#FF2E7E; --gold:#FFC53D; --card:#FFFFFF; --line:#F0CFB0; --shadow:rgba(42,15,58,.14);
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A0B2B; --bg2:#2A1240; --ink:#FFF1E4; --soft:#C8A9DC; --flame:#FF6A2E; --ember:#FF4D93; --gold:#FFC53D; --card:#26113D; --line:#4A2A66; --shadow:rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A0B2B; --bg2:#2A1240; --ink:#FFF1E4; --soft:#C8A9DC; --flame:#FF6A2E; --ember:#FF4D93; --gold:#FFC53D; --card:#26113D; --line:#4A2A66; --shadow:rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(120% 70% at 50% -10%,var(--bg2),var(--bg) 60%);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+main{max-width:520px;margin:0 auto;padding:28px 20px 56px;position:relative}
+h1,h2,.display{font-family:"Bagel Fat One","Arial Black",sans-serif;font-weight:400;line-height:.95;margin:0;letter-spacing:.01em}
+h1{font-size:clamp(64px,19vw,104px);color:var(--flame);text-shadow:4px 4px 0 var(--gold)}
+h2{font-size:clamp(34px,10vw,52px);color:var(--flame)}
+p{margin:10px 0}
+.muted{color:var(--soft)}
+.screen{display:none}
+.screen.on{display:block;animation:rise .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.screen.on{animation:none}.steam path{animation:none!important}}
+
+/* hero */
+.hero{text-align:center;padding-top:8px}
+.cup{width:170px;height:170px;margin:0 auto 6px;display:block}
+.steam path{stroke:var(--soft);stroke-width:5;stroke-linecap:round;fill:none;opacity:0;animation:steam 2.4s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.5s}.steam path:nth-child(3){animation-delay:1s}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}30%{opacity:.8}100%{opacity:0;transform:translateY(-22px)}}
+.lead{font-size:22px;font-weight:800;margin:14px 0 4px}
+.when{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);font-weight:800;padding:8px 16px;border-radius:999px;margin-top:10px;font-size:16px}
+.count{color:var(--gold)}
+.btns{display:flex;justify-content:center;gap:12px;margin-top:30px;position:relative;min-height:70px}
+button{font:inherit;font-weight:800;border:0;border-radius:18px;padding:16px 26px;cursor:pointer;color:var(--ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ember);outline-offset:3px}
+.yes{background:var(--flame);color:#fff;font-size:21px;box-shadow:0 8px 0 #B8360A;transition:transform .08s,box-shadow .08s}
+.yes:active{transform:translateY(6px);box-shadow:0 2px 0 #B8360A}
+.no{background:transparent;color:var(--soft);border:2px dashed var(--soft);transition:transform .22s cubic-bezier(.3,1.4,.5,1)}
+
+/* spots */
+.spots{display:grid;gap:16px;margin-top:22px}
+.spot{position:relative;display:block;text-align:left;background:var(--card);color:var(--ink);border:3px solid transparent;border-radius:24px;padding:0;width:100%;overflow:hidden;box-shadow:0 10px 24px var(--shadow);transition:transform .15s,border-color .15s}
+.spot:hover,.spot:focus-visible{transform:translateY(-3px);border-color:var(--flame)}
+.spot svg{display:block;width:100%;height:150px}
+.spot .txt{padding:14px 18px 18px}
+.spot b{display:block;font-size:21px;font-family:"Bagel Fat One",sans-serif;font-weight:400}
+.spot small{display:block;color:var(--soft);font-weight:600;font-size:15px;margin-top:4px}
+.meta{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px;font-weight:700;color:var(--soft);flex-wrap:wrap}
+.feet{letter-spacing:2px}
+.feet i{font-style:normal;opacity:.25}.feet i.on{opacity:1}
+.devil{position:absolute;top:12px;left:12px;background:var(--gold);color:#2A0F3A;font-weight:800;font-size:13px;padding:5px 12px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+
+/* ticket */
+.ticket{margin-top:22px;background:var(--card);border-radius:26px;box-shadow:0 14px 30px var(--shadow);position:relative}
+.ticket .top{background:var(--flame);color:#fff;padding:22px 22px 26px;border-radius:26px 26px 0 0;position:relative}
+.ticket .top h2{color:#fff;text-shadow:3px 3px 0 #B8360A}
+.ticket .top small{display:block;font-weight:800;opacity:.9;margin-top:6px}
+.tear{height:0;border-top:3px dashed var(--bg);position:relative;margin:0 14px}
+.tear::before,.tear::after{content:"";position:absolute;top:-14px;width:26px;height:26px;border-radius:50%;background:var(--bg)}
+.tear::before{left:-27px}.tear::after{right:-27px}
+.body{padding:18px 22px 22px}
+.row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.row:last-of-type{border-bottom:0}
+.row span:first-child{color:var(--soft);font-weight:700}
+.row span:last-child{font-weight:800;text-align:right}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.act{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:800;padding:14px;border-radius:16px;background:var(--gold);color:#2A0F3A;border:0;font-size:16px;cursor:pointer}
+.act.alt{background:var(--bg2);color:var(--ink)}
+.note{margin-top:18px;font-size:16px;text-align:center}
+.back{display:block;margin:14px auto 0;background:transparent;color:var(--soft);text-decoration:underline;padding:8px}
+canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-weight:800;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)}
+footer{text-align:center;color:var(--soft);font-size:14px;font-weight:700;margin-top:40px}
+</style>
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<main>
+
+<section class="screen on hero" id="s1">
+  <svg class="cup" viewBox="0 0 200 200" aria-hidden="true">
+    <g class="steam"><path d="M78 70c-8-12 8-18 0-30"/><path d="M100 64c-8-12 8-18 0-30"/><path d="M122 70c-8-12 8-18 0-30"/></g>
+    <path d="M44 84 L30 54 L62 72 Z" fill="#B8360A"/><path d="M156 84 L170 54 L138 72 Z" fill="#B8360A"/>
+    <path d="M48 90h104v38a52 52 0 0 1-104 0z" fill="#FF5A1F"/>
+    <path d="M152 100h14a16 16 0 0 1 0 32h-14" fill="none" stroke="#FF5A1F" stroke-width="12"/>
+    <ellipse cx="100" cy="90" rx="52" ry="12" fill="#5A2A12"/>
+    <ellipse cx="100" cy="88" rx="46" ry="9" fill="#C97A3A"/>
+    <circle cx="82" cy="118" r="6" fill="#2A0F3A"/><circle cx="118" cy="118" r="6" fill="#2A0F3A"/>
+    <path d="M84 136q16 12 32 0" stroke="#2A0F3A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M62 172h76" stroke="#5A2A12" stroke-width="8" stroke-linecap="round"/>
+  </svg>
+  <h1>Demon,</h1>
+  <p class="lead">the Devil would like to buy you a coffee.</p>
+  <span class="when">Sunday 18 Oct, 1:00 pm <span class="count" id="count"></span></span>
+  <div class="btns">
+    <button class="yes" id="yes">Yes, obviously</button>
+    <button class="no" id="no">No</button>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <h2>Knew it.</h2>
+  <p class="muted">Your call on the spot. All three are open at 1pm and none of them involve a proper walk.</p>
+  <div class="spots">
+
+    <button class="spot" data-i="0">
+      <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="150" fill="#BFE6FF"/>
+        <circle cx="330" cy="38" r="22" fill="#FFC53D"/>
+        <path d="M0 120 Q200 40 400 120 V150 H0Z" fill="#7CC86B"/>
+        <path d="M0 150 Q200 95 400 150Z" fill="#5FAE52"/>
+        <rect x="192" y="70" width="12" height="40" fill="#6B3E1E"/>
+        <circle cx="198" cy="56" r="28" fill="#2F7D3C"/>
+        <circle cx="178" cy="68" r="18" fill="#3A9448"/><circle cx="220" cy="66" r="18" fill="#3A9448"/>
+        <ellipse cx="90" cy="118" rx="14" ry="8" fill="#F6F2EA"/><ellipse cx="110" cy="124" rx="12" ry="7" fill="#F6F2EA"/>
+      </svg>
+      <span class="txt"><b>Cornwall Park Bistro</b><small>One Tree Hill. Coffee under the trees, cows wandering past, then a slow lap of the park if you feel like it.</small>
+      <span class="meta"><span class="feet"><i class="on">👟</i><i class="on">👟</i><i>👟</i></span> a little walking</span></span>
+    </button>
+
+    <button class="spot" data-i="1">
+      <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="150" fill="#FFD9B8"/>
+        <circle cx="70" cy="40" r="24" fill="#FF8A5B"/>
+        <path d="M0 95 Q100 80 200 95 T400 95 V150 H0Z" fill="#2E8BC0"/>
+        <path d="M0 115 Q100 100 200 115 T400 115 V150 H0Z" fill="#1E6FA3"/>
+        <path d="M0 150 Q200 128 400 150Z" fill="#F3DFA8"/>
+        <path d="M300 130 L330 60 L360 130Z" fill="#E2B37A"/>
+        <circle cx="330" cy="58" r="22" fill="#FFB7C5"/><circle cx="312" cy="70" r="18" fill="#8ED1A6"/><circle cx="348" cy="70" r="18" fill="#6B3E1E"/>
+      </svg>
+      <span class="txt"><b>Mövenpick, Mission Bay</b><small>Ice cream first, coffee second, beach in front of you the whole time.</small>
+      <span class="meta"><span class="feet"><i class="on">👟</i><i>👟</i><i>👟</i></span> hardly any walking</span></span>
+    </button>
+
+    <button class="spot" data-i="2">
+      <span class="devil">😈 Devil’s pick</span>
+      <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="150" fill="#FFB36B"/>
+        <circle cx="200" cy="80" r="34" fill="#FF5A1F"/>
+        <path d="M0 90 H400 V150 H0Z" fill="#1C5E8A"/>
+        <path d="M0 100 Q50 92 100 100 T200 100 T300 100 T400 100 V150 H0Z" fill="#2A7BB0"/>
+        <path d="M150 128 L250 128 L240 112 L160 112Z" fill="#FFF4E6"/>
+        <circle cx="185" cy="118" r="7" fill="#FF2E7E"/><circle cx="215" cy="118" r="7" fill="#FFC53D"/>
+      </svg>
+      <span class="txt"><b>La Vista, St Heliers</b><small>Sea view café on Tamaki Drive. Big windows, good coffee, 4.6 stars. Sit down and stay a while.</small>
+      <span class="meta"><span class="feet"><i class="on">👟</i><i>👟</i><i>👟</i></span> hardly any walking</span></span>
+    </button>
+
+  </div>
+</section>
+
+<section class="screen" id="s3">
+  <h2>It’s on.</h2>
+  <div class="ticket">
+    <div class="top"><h2 class="display" id="tName"></h2><small id="tAddr"></small></div>
+    <div class="tear"></div>
+    <div class="body">
+      <div class="row"><span>When</span><span>Sun 18 Oct, 1:00 pm</span></div>
+      <div class="row"><span>Who</span><span>Demon + Devil 😈</span></div>
+      <div class="row"><span>Walking</span><span id="tWalk"></span></div>
+      <div class="row"><span>Paying</span><span>The Devil</span></div>
+      <div class="acts">
+        <a class="act" id="tMap" href="#" target="_blank" rel="noopener">📍 Maps</a>
+        <a class="act alt" id="tCal" href="#" target="_blank" rel="noopener">📅 Calendar</a>
+      </div>
+      <button class="act alt" id="share" style="width:100%;margin-top:10px">💬 Send my pick to the Devil</button>
+    </div>
+  </div>
+  <p class="note muted" id="hint">Or just screenshot this and send it.</p>
+  <button class="back" id="back">Change my pick</button>
+</section>
+
+<footer>Made by the Devil. No refunds.</footer>
+</main>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+const spots=[
+  {name:"Cornwall Park Bistro",addr:"Cornwall Park, One Tree Hill",walk:"a little",map:"https://maps.google.com/?cid=13683540336428170892"},
+  {name:"Mövenpick",addr:"75 Tamaki Drive, Mission Bay",walk:"hardly any",map:"https://maps.google.com/?cid=17231593745436256591"},
+  {name:"La Vista",addr:"417 Tamaki Drive, St Heliers",walk:"hardly any",map:"https://maps.google.com/?cid=16528917945628331790"}
+];
+const $=id=>document.getElementById(id);
+const show=id=>{document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id));window.scrollTo({top:0})};
+
+/* countdown to Sunday 1pm NZDT */
+const target=new Date("2026-10-18T13:00:00+13:00").getTime();
+const tick=()=>{const d=target-Date.now();if(d<=0){$("count").textContent="· now";return}
+  const h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4);$("count").textContent=h>=24?`· ${Math.floor(h/24)}d ${h%24}h`:`· in ${h}h ${m}m`};
+tick();setInterval(tick,30000);
+
+$("yes").onclick=()=>show("s2");
+
+/* the No button has other plans */
+const no=$("no");
+const lines=["No?","Think again","Try harder","Coffee is free","It’s warm out","Rude","Just say yes","Fine, I’ll wait"];
+let n=0;
+const dodge=()=>{no.textContent=lines[n%lines.length];n++;
+  const x=(Math.random()*180-90)|0,y=(Math.random()*60-10)|0,r=(Math.random()*20-10)|0;
+  no.style.transform=`translate(${x}px,${y}px) rotate(${r}deg)`};
+no.addEventListener("mouseenter",dodge);
+no.addEventListener("touchstart",e=>{e.preventDefault();dodge()},{passive:false});
+no.addEventListener("click",e=>{e.preventDefault();dodge()});
+
+let picked=null;
+document.querySelectorAll(".spot").forEach(b=>b.onclick=()=>{
+  picked=spots[b.dataset.i];
+  $("tName").textContent=picked.name;$("tAddr").textContent=picked.addr;$("tWalk").textContent=picked.walk;
+  $("tMap").href=picked.map;
+  const t="Coffee: Demon + Devil",cal="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(t)+"&dates=20261018T000000Z/20261018T013000Z&location="+encodeURIComponent(picked.name+", "+picked.addr);
+  $("tCal").href=cal;
+  show("s3");burst();
+});
+$("back").onclick=()=>show("s2");
+
+/* share */
+$("share").onclick=async()=>{
+  const msg=`Demon has chosen: ${picked.name}, ${picked.addr}. Sunday 1pm. See you there, Devil 😈`;
+  try{ if(navigator.share){await navigator.share({text:msg});return} }catch(e){}
+  try{await navigator.clipboard.writeText(msg);toast("Copied, paste it to the Devil")}catch(e){toast("Screenshot this instead")}
+};
+const toast=t=>{const el=$("toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)};
+
+/* confetti */
+function burst(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const c=$("confetti"),ctx=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
+  const cols=["#FF5A1F","#FF2E7E","#FFC53D","#2A0F3A","#FFF4E6"];
+  const ps=Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*14,vy:Math.random()*-14-4,s:Math.random()*8+5,c:cols[Math.random()*cols.length|0],r:Math.random()*6.28,vr:(Math.random()-.5)*.3}));
+  let t=0;const step=()=>{ctx.clearRect(0,0,c.width,c.height);
+    ps.forEach(p=>{p.x+=p.vx;p.vy+=.45;p.y+=p.vy;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);ctx.restore()});
+    if(++t<110)requestAnimationFrame(step);else ctx.clearRect(0,0,c.width,c.height)};
+  requestAnimationFrame(step);
+}
+</script>
+</body>
+</html>
